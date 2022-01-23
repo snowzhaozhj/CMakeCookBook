@@ -1,0 +1,750 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>10.4 安装超级构建 - CMakeCookBook</title>
+                
+
+        <!-- Custom HTML head -->
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+                <link rel="icon" href="../../favicon.svg">
+                        <link rel="shortcut icon" href="../../favicon.png">
+                <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+                <link rel="stylesheet" href="../../css/print.css" media="print">
+        
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+                <link rel="stylesheet" href="../../fonts/fonts.css">
+        
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+            </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../../content/preface/preface-chinese.html"><strong aria-hidden="true">2.</strong> 前言</a></li><li class="chapter-item expanded "><a href="../../content/chapter0/0.0-chinese.html"><strong aria-hidden="true">3.</strong> 第0章 配置环境</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter0/0.1-chinese.html"><strong aria-hidden="true">3.1.</strong> 0.1 获取代码</a></li><li class="chapter-item expanded "><a href="../../content/chapter0/0.2-chinese.html"><strong aria-hidden="true">3.2.</strong> 0.2 Docker镜像</a></li><li class="chapter-item expanded "><a href="../../content/chapter0/0.3-chinese.html"><strong aria-hidden="true">3.3.</strong> 0.3 安装必要的软件</a></li><li class="chapter-item expanded "><a href="../../content/chapter0/0.4-chinese.html"><strong aria-hidden="true">3.4.</strong> 0.4 测试环境</a></li><li class="chapter-item expanded "><a href="../../content/chapter0/0.5-chinese.html"><strong aria-hidden="true">3.5.</strong> 0.5 上报问题并提出改进建议</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.0-chinese.html"><strong aria-hidden="true">4.</strong> 第1章 从可执行文件到库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter1/1.1-chinese.html"><strong aria-hidden="true">4.1.</strong> 1.1 将单个源文件编译为可执行文件</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.2-chinese.html"><strong aria-hidden="true">4.2.</strong> 1.2 切换生成器</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.3-chinese.html"><strong aria-hidden="true">4.3.</strong> 1.3 构建和链接静态库和动态库</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.4-chinese.html"><strong aria-hidden="true">4.4.</strong> 1.4 用条件句控制编译</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.5-chinese.html"><strong aria-hidden="true">4.5.</strong> 1.5 向用户显示选项</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.6-chinese.html"><strong aria-hidden="true">4.6.</strong> 1.6 指定编译器</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.7-chinese.html"><strong aria-hidden="true">4.7.</strong> 1.7 切换构建类型</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.8-chinese.html"><strong aria-hidden="true">4.8.</strong> 1.8 设置编译器选项</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.9-chinese.html"><strong aria-hidden="true">4.9.</strong> 1.9 为语言设定标准</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.10-chinese.html"><strong aria-hidden="true">4.10.</strong> 1.10 使用控制流</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter2/2.0-chinese.html"><strong aria-hidden="true">5.</strong> 第2章 检测环境</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter2/2.1-chinese.html"><strong aria-hidden="true">5.1.</strong> 2.1 检测操作系统</a></li><li class="chapter-item expanded "><a href="../../content/chapter2/2.2-chinese.html"><strong aria-hidden="true">5.2.</strong> 2.2 处理与平台相关的源代码</a></li><li class="chapter-item expanded "><a href="../../content/chapter2/2.3-chinese.html"><strong aria-hidden="true">5.3.</strong> 2.3 处理与编译器相关的源代码</a></li><li class="chapter-item expanded "><a href="../../content/chapter2/2.4-chinese.html"><strong aria-hidden="true">5.4.</strong> 2.4 检测处理器体系结构</a></li><li class="chapter-item expanded "><a href="../../content/chapter2/2.5-chinese.html"><strong aria-hidden="true">5.5.</strong> 2.5 检测处理器指令集</a></li><li class="chapter-item expanded "><a href="../../content/chapter2/2.6-chinese.html"><strong aria-hidden="true">5.6.</strong> 2.6 为Eigen库使能向量化</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.0-chinese.html"><strong aria-hidden="true">6.</strong> 第3章 检测外部库和程序</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter3/3.1-chinese.html"><strong aria-hidden="true">6.1.</strong> 3.1 检测Python解释器</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.2-chinese.html"><strong aria-hidden="true">6.2.</strong> 3.2 检测Python库</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.3-chinese.html"><strong aria-hidden="true">6.3.</strong> 3.3 检测Python模块和包</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.4-chinese.html"><strong aria-hidden="true">6.4.</strong> 3.4 检测BLAS和LAPACK数学库</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.5-chinese.html"><strong aria-hidden="true">6.5.</strong> 3.5 检测OpenMP的并行环境</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.6-chinese.html"><strong aria-hidden="true">6.6.</strong> 3.6 检测MPI的并行环境</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.7-chinese.html"><strong aria-hidden="true">6.7.</strong> 3.7 检测Eigen库</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.8-chinese.html"><strong aria-hidden="true">6.8.</strong> 3.8 检测Boost库</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.9-chinese.html"><strong aria-hidden="true">6.9.</strong> 3.9 检测外部库:Ⅰ. 使用pkg-config</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.10-chinese.html"><strong aria-hidden="true">6.10.</strong> 3.10 检测外部库:Ⅱ. 自定义find模块</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.0-chinese.html"><strong aria-hidden="true">7.</strong> 第4章 创建和运行测试</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter4/4.1-chinese.html"><strong aria-hidden="true">7.1.</strong> 4.1 创建一个简单的单元测试</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.2-chinese.html"><strong aria-hidden="true">7.2.</strong> 4.2 使用Catch2库进行单元测试</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.3-chinese.html"><strong aria-hidden="true">7.3.</strong> 4.3 使用Google Test库进行单元测试</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.4-chinese.html"><strong aria-hidden="true">7.4.</strong> 4.4 使用Boost Test进行单元测试</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.5-chinese.html"><strong aria-hidden="true">7.5.</strong> 4.5 使用动态分析来检测内存缺陷</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.6-chinese.html"><strong aria-hidden="true">7.6.</strong> 4.6 预期测试失败</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.7-chinese.html"><strong aria-hidden="true">7.7.</strong> 4.7 使用超时测试运行时间过长的测试</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.8-chinese.html"><strong aria-hidden="true">7.8.</strong> 4.8 并行测试</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.9-chinese.html"><strong aria-hidden="true">7.9.</strong> 4.9 运行测试子集</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.10-chinese.html"><strong aria-hidden="true">7.10.</strong> 4.10 使用测试固件</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.0-chinese.html"><strong aria-hidden="true">8.</strong> 第5章 配置时和构建时的操作</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter5/5.1-chinese.html"><strong aria-hidden="true">8.1.</strong> 5.1 使用平台无关的文件操作</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.2-chinese.html"><strong aria-hidden="true">8.2.</strong> 5.2 配置时运行自定义命令</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.3-chinese.html"><strong aria-hidden="true">8.3.</strong> 5.3 构建时运行自定义命令:Ⅰ. 使用add_custom_command</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.4-chinese.html"><strong aria-hidden="true">8.4.</strong> 5.4 构建时运行自定义命令:Ⅱ. 使用add_custom_target</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.5-chinese.html"><strong aria-hidden="true">8.5.</strong> 5.5 构建时为特定目标运行自定义命令</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.6-chinese.html"><strong aria-hidden="true">8.6.</strong> 5.6 探究编译和链接命令</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.7-chinese.html"><strong aria-hidden="true">8.7.</strong> 5.7 探究编译器标志命令</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.8-chinese.html"><strong aria-hidden="true">8.8.</strong> 5.8 探究可执行命令</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.9-chinese.html"><strong aria-hidden="true">8.9.</strong> 5.9 使用生成器表达式微调配置和编译</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter6/6.0-chinese.html"><strong aria-hidden="true">9.</strong> 第6章 生成源码</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter6/6.1-chinese.html"><strong aria-hidden="true">9.1.</strong> 6.1 配置时生成源码</a></li><li class="chapter-item expanded "><a href="../../content/chapter6/6.2-chinese.html"><strong aria-hidden="true">9.2.</strong> 6.2 使用Python在配置时生成源码</a></li><li class="chapter-item expanded "><a href="../../content/chapter6/6.3-chinese.html"><strong aria-hidden="true">9.3.</strong> 6.3 构建时使用Python生成源码</a></li><li class="chapter-item expanded "><a href="../../content/chapter6/6.4-chinese.html"><strong aria-hidden="true">9.4.</strong> 6.4 记录项目版本信息以便报告</a></li><li class="chapter-item expanded "><a href="../../content/chapter6/6.5-chinese.html"><strong aria-hidden="true">9.5.</strong> 6.5 从文件中记录项目版本</a></li><li class="chapter-item expanded "><a href="../../content/chapter6/6.6-chinese.html"><strong aria-hidden="true">9.6.</strong> 6.6 配置时记录Git Hash值</a></li><li class="chapter-item expanded "><a href="../../content/chapter6/6.7-chinese.html"><strong aria-hidden="true">9.7.</strong> 6.7 构建时记录Git Hash值</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.0-chinese.html"><strong aria-hidden="true">10.</strong> 第7章 构建项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter7/7.1-chinese.html"><strong aria-hidden="true">10.1.</strong> 7.1 使用函数和宏重用代码</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.2-chinese.html"><strong aria-hidden="true">10.2.</strong> 7.2 将CMake源代码分成模块</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.3-chinese.html"><strong aria-hidden="true">10.3.</strong> 7.3 编写函数来测试和设置编译器标志</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.4-chinese.html"><strong aria-hidden="true">10.4.</strong> 7.4 用指定参数定义函数或宏</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.5-chinese.html"><strong aria-hidden="true">10.5.</strong> 7.5 重新定义函数和宏</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.6-chinese.html"><strong aria-hidden="true">10.6.</strong> 7.6 使用废弃函数、宏和变量</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.7-chinese.html"><strong aria-hidden="true">10.7.</strong> 7.7 add_subdirectory的限定范围</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.8-chinese.html"><strong aria-hidden="true">10.8.</strong> 7.8 使用target_sources避免全局变量</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.9-chinese.html"><strong aria-hidden="true">10.9.</strong> 7.9 组织Fortran项目</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter8/8.0-chinese.html"><strong aria-hidden="true">11.</strong> 第8章 超级构建模式</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter8/8.1-chinese.html"><strong aria-hidden="true">11.1.</strong> 8.1 使用超级构建模式</a></li><li class="chapter-item expanded "><a href="../../content/chapter8/8.2-chinese.html"><strong aria-hidden="true">11.2.</strong> 8.2 使用超级构建管理依赖项:Ⅰ.Boost库</a></li><li class="chapter-item expanded "><a href="../../content/chapter8/8.3-chinese.html"><strong aria-hidden="true">11.3.</strong> 8.3 使用超级构建管理依赖项:Ⅱ.FFTW库</a></li><li class="chapter-item expanded "><a href="../../content/chapter8/8.4-chinese.html"><strong aria-hidden="true">11.4.</strong> 8.4 使用超级构建管理依赖项:Ⅲ.Google Test框架</a></li><li class="chapter-item expanded "><a href="../../content/chapter8/8.5-chinese.html"><strong aria-hidden="true">11.5.</strong> 8.5 使用超级构建支持项目</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter9/9.0-chinese.html"><strong aria-hidden="true">12.</strong> 第9章 语言混合项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter9/9.1-chinese.html"><strong aria-hidden="true">12.1.</strong> 9.1 使用C/C++库构建Fortran项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter9/9.2-chinese.html"><strong aria-hidden="true">12.2.</strong> 9.2 使用Fortran库构建C/C++项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter9/9.3-chinese.html"><strong aria-hidden="true">12.3.</strong> 9.3 使用Cython构建C++和Python项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter9/9.4-chinese.html"><strong aria-hidden="true">12.4.</strong> 9.4 使用Boost.Python构建C++和Python项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter9/9.5-chinese.html"><strong aria-hidden="true">12.5.</strong> 9.5 使用pybind11构建C++和Python项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter9/9.6-chinese.html"><strong aria-hidden="true">12.6.</strong> 9.6 使用Python CFFI混合C，C++，Fortran和Python</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter10/10.0-chinese.html"><strong aria-hidden="true">13.</strong> 第10章 编写安装程序</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter10/10.1-chinese.html"><strong aria-hidden="true">13.1.</strong> 10.1 安装项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter10/10.2-chinese.html"><strong aria-hidden="true">13.2.</strong> 10.2 生成输出头文件</a></li><li class="chapter-item expanded "><a href="../../content/chapter10/10.3-chinese.html"><strong aria-hidden="true">13.3.</strong> 10.3 输出目标</a></li><li class="chapter-item expanded "><a href="../../content/chapter10/10.4-chinese.html" class="active"><strong aria-hidden="true">13.4.</strong> 10.4 安装超级构建</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter11/11.0-chinese.html"><strong aria-hidden="true">14.</strong> 第11章 打包项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter11/11.1-chinese.html"><strong aria-hidden="true">14.1.</strong> 11.1 生成源代码和二进制包</a></li><li class="chapter-item expanded "><a href="../../content/chapter11/11.2-chinese.html"><strong aria-hidden="true">14.2.</strong> 11.2 通过PyPI发布使用CMake/pybind11构建的C++/Python项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter11/11.3-chinese.html"><strong aria-hidden="true">14.3.</strong> 11.3 通过PyPI发布使用CMake/CFFI构建C/Fortran/Python项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter11/11.4-chinese.html"><strong aria-hidden="true">14.4.</strong> 11.4 以Conda包的形式发布一个简单的项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter11/11.5-chinese.html"><strong aria-hidden="true">14.5.</strong> 11.5 将Conda包作为依赖项发布给项目</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter12/12.0-chinese.html"><strong aria-hidden="true">15.</strong> 第12章 构建文档</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter12/12.1-chinese.html"><strong aria-hidden="true">15.1.</strong> 12.1 使用Doxygen构建文档</a></li><li class="chapter-item expanded "><a href="../../content/chapter12/12.2-chinese.html"><strong aria-hidden="true">15.2.</strong> 12.2 使用Sphinx构建文档</a></li><li class="chapter-item expanded "><a href="../../content/chapter12/12.3-chinese.html"><strong aria-hidden="true">15.3.</strong> 12.3 结合Doxygen和Sphinx</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter13/13.0-chinese.html"><strong aria-hidden="true">16.</strong> 第13章 选择生成器和交叉编译</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter13/13.1-chinese.html"><strong aria-hidden="true">16.1.</strong> 13.1 使用CMake构建Visual Studio 2017项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter13/13.2-chinese.html"><strong aria-hidden="true">16.2.</strong> 13.2 交叉编译hello world示例</a></li><li class="chapter-item expanded "><a href="../../content/chapter13/13.3-chinese.html"><strong aria-hidden="true">16.3.</strong> 13.3 使用OpenMP并行化交叉编译Windows二进制文件</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter14/14.0-chinese.html"><strong aria-hidden="true">17.</strong> 第14章 测试面板</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter14/14.1-chinese.html"><strong aria-hidden="true">17.1.</strong> 14.1 将测试部署到CDash</a></li><li class="chapter-item expanded "><a href="../../content/chapter14/14.2-chinese.html"><strong aria-hidden="true">17.2.</strong> 14.2 CDash显示测试覆盖率</a></li><li class="chapter-item expanded "><a href="../../content/chapter14/14.3-chinese.html"><strong aria-hidden="true">17.3.</strong> 14.3 使用AddressSanifier向CDash报告内存缺陷</a></li><li class="chapter-item expanded "><a href="../../content/chapter14/14.4-chinese.html"><strong aria-hidden="true">17.4.</strong> 14.4 使用ThreadSaniiser向CDash报告数据争用</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.0-chinese.html"><strong aria-hidden="true">18.</strong> 第15章 使用CMake构建已有项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter15/15.1-chinese.html"><strong aria-hidden="true">18.1.</strong> 15.1 如何开始迁移项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.2-chinese.html"><strong aria-hidden="true">18.2.</strong> 15.2 生成文件并编写平台检查</a></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.3-chinese.html"><strong aria-hidden="true">18.3.</strong> 15.3 检测所需的链接和依赖关系</a></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.4-chinese.html"><strong aria-hidden="true">18.4.</strong> 15.4 复制编译标志</a></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.5-chinese.html"><strong aria-hidden="true">18.5.</strong> 15.5 移植测试</a></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.6-chinese.html"><strong aria-hidden="true">18.6.</strong> 15.6 移植安装目标</a></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.7-chinese.html"><strong aria-hidden="true">18.7.</strong> 15.7 进一步迁移的措施</a></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.8-chinese.html"><strong aria-hidden="true">18.8.</strong> 15.8 项目转换为CMake的常见问题</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter16/16.0-chinese.html"><strong aria-hidden="true">19.</strong> 第16章 可能感兴趣的书</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter16/16.1-chinese.html"><strong aria-hidden="true">19.1.</strong> 16.1 留下评论——让其他读者知道你的想法</a></li></ol></li></ol>            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                                                <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                                            </div>
+
+                    <h1 class="menu-title">CMakeCookBook</h1>
+
+                    <div class="right-buttons">
+                                                <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                                                                        
+                    </div>
+                </div>
+
+                                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="104-安装超级构建"><a class="header" href="#104-安装超级构建">10.4 安装超级构建</a></h1>
+<p><strong>NOTE</strong>:<em>此示例代码可以在 https://github.com/dev-cafe/cmake-cookbook/tree/v1.0/chapter-10/recipe-04 中找到，其中有一个C++示例。该示例在CMake 3.6版(或更高版本)中是有效的，并且已经在GNU/Linux、macOS和Windows上进行过测试。</em></p>
+<p>我们的消息库取得了巨大的成功，许多其他程序员都使用它，并且非常满意。也希望在自己的项目中使用它，但是不确定如何正确地管理依赖关系。可以用自己的代码附带消息库的源代码，但是如果该库已经安装在系统上了应该怎么做呢？第8章，展示了超级构建的场景，但是不确定如何安装这样的项目。本示例将带您了解安装超级构建的安装细节。</p>
+<h2 id="准备工作"><a class="header" href="#准备工作">准备工作</a></h2>
+<p>此示例将针对消息库，构建一个简单的可执行链接。项目布局如下:</p>
+<pre><code class="language-shell">├── cmake
+│    ├── install_hook.cmake.in
+│    └── print_rpath.py
+├── CMakeLists.txt
+├── external
+│    └── upstream
+│        ├── CMakeLists.txt
+│        └── message
+│            └── CMakeLists.txt
+└── src
+    ├── CMakeLists.txt
+    └── use_message.cpp
+</code></pre>
+<p>主<code>CMakeLists.txt</code>文件配合超级构建，<code>external</code>子目录包含处理依赖项的CMake指令。<code>cmake</code>子目录包含一个Python脚本和一个模板CMake脚本。这些将用于安装方面的微调，CMake脚本首先进行配置，然后调用Python脚本打印<code>use_message</code>可执行文件的<code>RPATH</code>:</p>
+<pre><code class="language-python">import shlex
+import subprocess
+import sys
+
+def main():
+  patcher = sys.argv[1]
+  elfobj = sys.argv[2]
+  tools = {'patchelf': '--print-rpath', 'chrpath': '--list', 'otool': '-L'}
+  if patcher not in tools.keys():
+  raise RuntimeError('Unknown tool {}'.format(patcher))
+  cmd = shlex.split('{:s} {:s} {:s}'.format(patcher, tools[patcher], elfobj))
+  rpath = subprocess.run(
+      cmd,
+      bufsize=1,
+      stdout=subprocess.PIPE,
+      stderr=subprocess.PIPE,
+      universal_newlines=True)
+  print(rpath.stdout)
+
+if __name__ == &quot;__main__&quot;:
+  main()
+</code></pre>
+<p>使用平台原生工具可以轻松地打印<code>RPATH</code>，稍后我们将在本示例中讨论这些工具。</p>
+<p>最后，<code>src</code>子目录包含项目的<code>CMakeLists.txt</code>和源文件。<code>use_message.cpp</code>源文件包含以下内容:</p>
+<pre><code class="language-c++">#include &lt;cstdlib&gt;
+#include &lt;iostream&gt;
+
+#ifdef USING_message
+#include &lt;message/Message.hpp&gt;
+void messaging()
+{
+  Message say_hello(&quot;Hello, World! From a client of yours!&quot;);
+  std::cout &lt;&lt; say_hello &lt;&lt; std::endl;
+  Message say_goodbye(&quot;Goodbye, World! From a client of yours!&quot;);
+  std::cout &lt;&lt; say_goodbye &lt;&lt; std::endl;
+}
+#else
+void messaging()
+{
+  std::cout &lt;&lt; &quot;Hello, World! From a client of yours!&quot; &lt;&lt; std::endl;
+  std::cout &lt;&lt; &quot;Goodbye, World! From a client of yours!&quot; &lt;&lt; std::endl;
+}
+#endif
+
+int main()
+{
+  messaging();
+  return EXIT_SUCCESS;
+}
+</code></pre>
+<h2 id="具体实施"><a class="header" href="#具体实施">具体实施</a></h2>
+<p>我们将从主<code>CMakeLists.txt</code>文件开始，它用来协调超级构建:</p>
+<ol>
+<li>
+<p>与之前的示例相同。首先声明一个C++11项目，设置了默认安装路径、构建类型、目标的输出目录，以及安装树中组件的布局:</p>
+<pre><code class="language-cmake">cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
+
+project(recipe-04
+  LANGUAGES CXX
+  VERSION 1.0.0
+  )
+
+# &lt;&lt;&lt; General set up &gt;&gt;&gt;
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING &quot;Build type&quot; FORCE)
+endif()
+
+message(STATUS &quot;Build type set to ${CMAKE_BUILD_TYPE}&quot;)
+
+message(STATUS &quot;Project will be installed to ${CMAKE_INSTALL_PREFIX}&quot;)
+
+include(GNUInstallDirs)
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY
+  ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY
+  ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY
+  ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
+
+# Offer the user the choice of overriding the installation directories
+set(INSTALL_LIBDIR ${CMAKE_INSTALL_LIBDIR} CACHE PATH &quot;Installation directory for libraries&quot;)
+set(INSTALL_BINDIR ${CMAKE_INSTALL_BINDIR} CACHE PATH &quot;Installation directory for executables&quot;)
+set(INSTALL_INCLUDEDIR ${CMAKE_INSTALL_INCLUDEDIR} CACHE PATH &quot;Installation directory for header files&quot;)
+if(WIN32 AND NOT CYGWIN)
+  set(DEF_INSTALL_CMAKEDIR CMake)
+else()
+  set(DEF_INSTALL_CMAKEDIR share/cmake/${PROJECT_NAME})
+endif()
+set(INSTALL_CMAKEDIR ${DEF_INSTALL_CMAKEDIR} CACHE PATH &quot;Installation directory for CMake files&quot;)
+
+# Report to user
+foreach(p LIB BIN INCLUDE CMAKE)
+  file(TO_NATIVE_PATH ${CMAKE_INSTALL_PREFIX}/${INSTALL_${p}DIR} _path )
+  message(STATUS &quot;Installing ${p} components to ${_path}&quot;)
+  unset(_path)
+endforeach()
+</code></pre>
+</li>
+<li>
+<p>设置了<code>EP_BASE</code>目录属性，这将为超构建中的子项目设置布局。所有子项目都将在<code>CMAKE_BINARY_DIR</code>的子项目文件夹下生成:</p>
+<pre><code class="language-cmake">set_property(DIRECTORY PROPERTY EP_BASE ${CMAKE_BINARY_DIR}/subprojects)
+</code></pre>
+</li>
+<li>
+<p>然后，声明<code>STAGED_INSTALL_PREFIX</code>变量。这个变量指向构建目录下的<code>stage</code>子目录，项目将在构建期间安装在这里。这是一种沙箱安装过程，让我们有机会检查整个超级构建的布局:</p>
+<pre><code class="language-cmake">set(STAGED_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/stage)
+message(STATUS &quot;${PROJECT_NAME} staged install: ${STAGED_INSTALL_PREFIX}&quot;)
+</code></pre>
+</li>
+<li>
+<p>添加<code>external/upstream</code>子目录。其中包括使用CMake指令来管理我们的上游依赖关系，在我们的例子中，就是消息库:</p>
+<pre><code class="language-cmake">add_subdirectory(external/upstream)
+</code></pre>
+</li>
+<li>
+<p>然后，包含<code> ExternalProject.cmake</code>标准模块:</p>
+<pre><code class="language-cmake">include(ExternalProject)
+</code></pre>
+</li>
+<li>
+<p>将自己的项目作为外部项目添加，调用<code>ExternalProject_Add</code>命令。<code>SOURCE_DIR</code>用于指定源位于<code>src</code>子目录中。我们会选择适当的CMake参数来配置我们的项目。这里，使用<code>STAGED_INSTALL_PREFIX</code>作为子项目的安装目录:</p>
+<pre><code class="language-cmake">ExternalProject_Add(${PROJECT_NAME}_core
+  DEPENDS
+    message_external
+  SOURCE_DIR
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+  CMAKE_ARGS
+    -DCMAKE_INSTALL_PREFIX=${STAGED_INSTALL_PREFIX}
+    -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+    -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+    -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}
+    -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}
+    -DCMAKE_CXX_EXTENSIONS=${CMAKE_CXX_EXTENSIONS}
+    -DCMAKE_CXX_STANDARD_REQUIRED=${CMAKE_CXX_STANDARD_REQUIRED}
+    -Dmessage_DIR=${message_DIR}
+  CMAKE_CACHE_ARGS
+    -DCMAKE_PREFIX_PATH:PATH=${CMAKE_PREFIX_PATH}
+  BUILD_ALWAYS
+    1
+  )
+</code></pre>
+</li>
+<li>
+<p>现在，为<code>use_message</code>添加一个测试，并由<code>recipe-04_core</code>构建。这将运行<code>use_message</code>可执行文件的安装，即位于构建树中的安装:</p>
+<pre><code class="language-cmake">enable_testing()
+
+add_test(
+  NAME
+  	check_use_message
+  COMMAND
+  	${STAGED_INSTALL_PREFIX}/${INSTALL_BINDIR}/use_message
+  )
+</code></pre>
+</li>
+<li>
+<p>最后，可以声明安装规则。因为所需要的东西都已经安装在暂存区域中，我们只要将暂存区域的内容复制到安装目录即可:</p>
+<pre><code class="language-cmake">install(
+  DIRECTORY
+  	${STAGED_INSTALL_PREFIX}/
+  DESTINATION
+  	.
+  USE_SOURCE_PERMISSIONS
+  )
+</code></pre>
+</li>
+<li>
+<p>使用<code>SCRIPT</code>参数声明一个附加的安装规则。CMake脚本的<code>install_hook.cmake</code>将被执行，但只在GNU/Linux和macOS上执行。这个脚本将打印已安装的可执行文件的<code>RPATH</code>，并运行它。我们将在下一节详细地讨论这个问题：</p>
+<pre><code class="language-cmake">if(UNIX)
+  set(PRINT_SCRIPT &quot;${CMAKE_CURRENT_LIST_DIR}/cmake/print_rpath.py&quot;)
+  configure_file(cmake/install_hook.cmake.in install_hook.cmake @ONLY)
+  install(
+    SCRIPT
+      ${CMAKE_CURRENT_BINARY_DIR}/install_hook.cmake
+    )
+endif()
+</code></pre>
+</li>
+</ol>
+<p><code>-Dmessage_DIR=${message_DIR}</code>已作为CMake参数传递给项目，这将正确设置消息库依赖项的位置。<code>message_DIR</code>的值在<code>external/upstream/message</code>目录下的<code>CMakeLists.txt</code>文件中定义。这个文件处理依赖于消息库，让我们看看是如何处理的:</p>
+<ol>
+<li>
+<p>首先，搜索并找到包。用户可能已经在系统的某个地方安装了，并在配置时传递了<code>message_DIR</code>:</p>
+<pre><code class="language-cmake">find_package(message 1 CONFIG QUIET)
+</code></pre>
+</li>
+<li>
+<p>如果找到了消息库，我们将向用户报告目标的位置和版本，并添加一个虚拟的<code>message_external</code>目标。这里，需要虚拟目标来正确处理超构建的依赖关系:</p>
+<pre><code class="language-cmake">if(message_FOUND)
+  get_property(_loc TARGET message::message-shared PROPERTY LOCATION)
+  message(STATUS &quot;Found message: ${_loc} (found version ${message_VERSION})&quot;)
+  add_library(message_external INTERFACE) # dummy
+</code></pre>
+</li>
+<li>
+<p>如果没有找到这个库，我们将把它添加为一个外部项目，从在线Git存储库下载它，然后编译它。安装路径、构建类型和安装目录布局都是由主<code>CMakeLists.txt</code>文件设置，C++编译器和标志也是如此。项目将安装到<code>STAGED_INSTALL_PREFIX</code>下，然后进行测试:</p>
+<pre><code class="language-cmake">else()
+  include(ExternalProject)
+  message(STATUS &quot;Suitable message could not be located, Building message instead.&quot;)
+  ExternalProject_Add(message_external
+    GIT_REPOSITORY
+      https://github.com/dev-cafe/message.git
+    GIT_TAG
+      master
+    UPDATE_COMMAND
+      &quot;&quot;
+    CMAKE_ARGS
+      -DCMAKE_INSTALL_PREFIX=${STAGED_INSTALL_PREFIX}
+      -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+      -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+    CMAKE_CACHE_ARGS
+      -DCMAKE_CXX_FLAGS:STRING=${CMAKE_CXX_FLAGS}
+    TEST_AFTER_INSTALL
+      1
+    DOWNLOAD_NO_PROGRESS
+      1
+    LOG_CONFIGURE
+      1
+    LOG_BUILD
+      1
+    LOG_INSTALL
+      1
+  )
+</code></pre>
+</li>
+<li>
+<p>最后，将<code>message_DIR</code>目录进行设置，为指向新构建的<code> messageConfig.cmake</code>文件指明安装路径。注意，这些路径被保存到<code>CMakeCache</code>中:</p>
+<pre><code class="language-cmake">  if(WIN32 AND NOT CYGWIN)
+    set(DEF_message_DIR ${STAGED_INSTALL_PREFIX}/CMake)
+  else()
+    set(DEF_message_DIR ${STAGED_INSTALL_PREFIX}/share/cmake/message)
+  endif()
+  file(TO_NATIVE_PATH &quot;${DEF_message_DIR}&quot; DEF_message_DIR)
+  set(message_DIR ${DEF_message_DIR}
+    CACHE PATH &quot;Path to internally built messageConfig.cmake&quot; FORCE)
+endif()
+</code></pre>
+</li>
+</ol>
+<p>我们终于准备好编译我们自己的项目，并成功地将其链接到消息库(无论是系统上已有的消息库，还是新构建的消息库)。由于这是一个超级构建，<code>src</code>子目录下的代码是一个完全独立的CMake项目:</p>
+<ol>
+<li>
+<p>声明一个C++11项目：</p>
+<pre><code class="language-cmake">cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
+
+project(recipe-04_core
+  LANGUAGES CXX
+  )
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+include(GNUInstallDirs)
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY
+  ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY
+  ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY
+  ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
+</code></pre>
+</li>
+<li>
+<p>尝试找到消息库。超级构建中，正确设置<code>message_DIR</code>:</p>
+<pre><code class="language-cmake">find_package(message 1 CONFIG REQUIRED)
+get_property(_loc TARGET message::message-shared PROPERTY LOCATION)
+message(STATUS &quot;Found message: ${_loc} (found version ${message_VERSION})&quot;)
+</code></pre>
+</li>
+<li>
+<p>添加可执行目标<code>use_message</code>，该目标由<code>use_message.cpp</code>源文件创建，并连接到<code>message::message-shared</code>目标:</p>
+<pre><code class="language-cmake">add_executable(use_message use_message.cpp)
+
+target_link_libraries(use_message
+  PUBLIC
+  	message::message-shared
+  )
+</code></pre>
+</li>
+<li>
+<p>为<code>use_message</code>设置目标属性。再次对<code>RPATH</code>进行设置:</p>
+<pre><code class="language-cmake"># Prepare RPATH
+file(RELATIVE_PATH _rel ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR} ${CMAKE_INSTALL_PREFIX})
+if(APPLE)
+  set(_rpath &quot;@loader_path/${_rel}&quot;)
+else()
+  set(_rpath &quot;\$ORIGIN/${_rel}&quot;)
+endif()
+file(TO_NATIVE_PATH &quot;${_rpath}/${CMAKE_INSTALL_LIBDIR}&quot; use_message_RPATH)
+
+set_target_properties(use_message
+  PROPERTIES
+    MACOSX_RPATH ON
+    SKIP_BUILD_RPATH OFF
+    BUILD_WITH_INSTALL_RPATH OFF
+    INSTALL_RPATH &quot;${use_message_RPATH}&quot;
+    INSTALL_RPATH_USE_LINK_PATH ON
+  )
+</code></pre>
+</li>
+<li>
+<p>最后，为<code>use_message</code>目标设置了安装规则:</p>
+<pre><code class="language-cmake">install(
+  TARGETS
+  	use_message
+  RUNTIME
+    DESTINATION ${CMAKE_INSTALL_BINDIR}
+    COMPONENT bin
+  )
+</code></pre>
+</li>
+</ol>
+<p>现在瞧瞧CMake脚本模板<code>install_hook.cmake.in</code>的内容：</p>
+<ol>
+<li>
+<p>CMake脚本在我们的主项目范围之外执行，因此没有定义变量或目标的概念。因此，需要设置变量来保存已安装的<code>use_message</code>可执行文件的完整路径。注意使用<code>@INSTALL_BINDIR@</code>，它将由<code>configure_file</code>解析：</p>
+<pre><code class="language-cmake">set(_executable ${CMAKE_INSTALL_PREFIX}/@INSTALL_BINDIR@/use_message)
+</code></pre>
+</li>
+<li>
+<p>需要找到平台本机可执行工具，使用该工具打印已安装的可执行文件的<code>RPATH</code>。我们将搜索<code>chrpath</code>、<code>patchelf</code>和<code>otool</code>。当找到已安装的程序时，向用户提供有用的状态信息，并且退出搜索：</p>
+<pre><code class="language-cmake">set(_patcher)
+list(APPEND _patchers chrpath patchelf otool)
+foreach(p IN LISTS _patchers)
+  find_program(${p}_FOUND
+    NAMES
+      ${p}
+    )
+  if(${p}_FOUND)
+    set(_patcher ${p})
+    message(STATUS &quot;ELF patching tool ${_patcher} FOUND&quot;)
+    break()
+  endif()
+endforeach()
+</code></pre>
+</li>
+<li>
+<p>检查<code>_patcher</code>变量是否为空，这意味着PatchELF工具是否可用。当为空时，我们要进行的操作将会失败，所以会发出一个致命错误，提醒用户需要安装PatchELF工具:</p>
+<pre><code class="language-cmake">if(NOT _patcher)
+	message(FATAL_ERROR &quot;ELF patching tool NOT FOUND!\nPlease install one of chrpath, patchelf or otool&quot;)
+</code></pre>
+</li>
+<li>
+<p>当PatchELF工具找到了，则继续。我们调用Python脚本<code>print_rpath.py</code>，将<code>_executable</code>变量作为参数传递给<code>execute_process</code>：</p>
+<pre><code class="language-cmake">  find_package(PythonInterp REQUIRED QUIET)
+  execute_process(
+    COMMAND
+      ${PYTHON_EXECUTABLE} @PRINT_SCRIPT@ &quot;${_patcher}&quot;
+    &quot;${_executable}&quot;
+    RESULT_VARIABLE _res
+    OUTPUT_VARIABLE _out
+    ERROR_VARIABLE _err
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+</code></pre>
+</li>
+<li>
+<p>检查<code>_res</code>变量的返回代码。如果执行成功，将打印<code>_out</code>变量中捕获的标准输出流。否则，打印退出前捕获的标准输出和错误流:</p>
+<pre><code class="language-cmake">  if(_res EQUAL 0)
+    message(STATUS &quot;RPATH for ${_executable} is ${_out}&quot;)
+  else()
+    message(STATUS &quot;Something went wrong!&quot;)
+    message(STATUS &quot;Standard output from print_rpath.py: ${_out}&quot;)
+    message(STATUS &quot;Standard error from print_rpath.py: ${_err}&quot;)
+    message(FATAL_ERROR &quot;${_patcher} could NOT obtain RPATH for ${_executable}&quot;)
+  endif()
+endif()
+</code></pre>
+</li>
+<li>
+<p>再使用<code>execute_process</code>来运行已安装的<code>use_message</code>可执行目标:</p>
+<pre><code class="language-cmake">execute_process(
+  COMMAND ${_executable}
+  RESULT_VARIABLE _res
+  OUTPUT_VARIABLE _out
+  ERROR_VARIABLE _err
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+</code></pre>
+</li>
+<li>
+<p>最后，向用户报告<code>execute_process</code>的结果:</p>
+<pre><code class="language-cmake">if(_res EQUAL 0)
+  message(STATUS &quot;Running ${_executable}:\n ${_out}&quot;)
+else()
+  message(STATUS &quot;Something went wrong!&quot;)
+  message(STATUS &quot;Standard output from running ${_executable}:\n ${_out}&quot;)
+  message(STATUS &quot;Standard error from running ${_executable}:\n ${_err}&quot;)
+  message(FATAL_ERROR &quot;Something went wrong with ${_executable}&quot;)
+endif()
+</code></pre>
+</li>
+</ol>
+<h2 id="工作原理"><a class="header" href="#工作原理">工作原理</a></h2>
+<p>CMake工具箱中，超级构建是非常有用的模式。它通过将复杂的项目划分为更小、更容易管理的子项目来管理它们。此外，可以使用CMake作为构建项目的包管理器。CMake可以搜索依赖项，如果在系统上找不到依赖项，则重新构建它们。这里需要三个<code>CMakeLists.txt</code>文件：</p>
+<ul>
+<li>主<code>CMakeLists.txt</code>文件包含项目和依赖项共享的设置，还包括我们自己的项目(作为外部项目)。本例中，我们选择的名称为<code>${PROJECT_NAME}_core</code>；也就是<code>recipe-04_core</code>，因为项目名称<code>recipe-04</code>用于超级构建。</li>
+<li>外部<code>CMakeLists.txt</code>文件将尝试查找上游依赖项，并在导入目标和构建目标之间进行切换，这取决于是否找到了依赖项。对于每个依赖项，最好有单独的子目录，其中包含一个<code>CMakeLists.txt</code>文件。</li>
+<li>最后，我们项目的<code>CMakeLists.txt</code>文件，可以构建一个独立的CMake项目。在原则上，我们可以自己配置和构建它，而不需要超级构建提供的依赖关系管理工具。</li>
+</ul>
+<p>当对消息库的依赖关系未得到满足时，将首先考虑超级构建:</p>
+<pre><code class="language-shell">$ mkdir -p build
+$ cd build
+$ cmake -DCMAKE_INSTALL_PREFIX=$HOME/Software/recipe-04 ..
+</code></pre>
+<p>让CMake查找库，这是我们得到的输出:</p>
+<pre><code class="language-shell">-- The CXX compiler identification is GNU 7.3.0
+-- Check for working CXX compiler: /nix/store/gqg2vrcq7krqi9rrl6pphvsg81sb8pjw-gcc-wrapper-7.3.0/bin/g++
+-- Check for working CXX compiler: /nix/store/gqg2vrcq7krqi9rrl6pphvsg81sb8pjw-gcc-wrapper-7.3.0/bin/g++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Project will be installed to /home/roberto/Software/recipe-04
+-- Build type set to Release
+-- Installing LIB components to /home/roberto/Software/recipe-04/lib64
+-- Installing BIN components to /home/roberto/Software/recipe-04/bin
+-- Installing INCLUDE components to /home/roberto/Software/recipe-04/include
+-- Installing CMAKE components to /home/roberto/Software/recipe-04/share/cmake/recipe-04
+-- recipe-04 staged install: /home/roberto/Workspace/robertodr/cmake-cookbook/chapter-10/recipe-04/cxx-example/build/stage
+-- Suitable message could not be located, Building message instead.
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/roberto/Workspace/robertodr/cmake-cookbook/chapter-10/recipe-04/cxx-example/build
+</code></pre>
+<p>根据指令，CMake报告如下:</p>
+<ul>
+<li>安装将分阶段进入构建树。分阶段安装是对实际安装过程进行沙箱化的一种方法。作为开发人员，这对于在运行安装命令之前检查所有库、可执行程序和文件是否安装在正确的位置非常有用。对于用户来说，可在构建目录中给出了相同的结构。这样，即使没有运行正确的安装，我们的项目也可以立即使用。</li>
+<li>系统上没有找到合适的消息库。然后，CMake将运行在构建项目之前构建库所提供的命令，以满足这种依赖性。</li>
+</ul>
+<p>如果库已经位于系统的已知位置，我们可以将<code>-Dmessage_DIR</code>选项传递给CMake:</p>
+<pre><code class="language-shell">$ cmake -DCMAKE_INSTALL_PREFIX=$HOME/Software/use_message -Dmessage_DIR=$HOME/Software/message/share/cmake/message ..
+</code></pre>
+<p>事实上，这个库已经找到并导入。我们对自己的项目进行建造操作:</p>
+<pre><code class="language-shell">-- The CXX compiler identification is GNU 7.3.0
+-- Check for working CXX compiler: /nix/store/gqg2vrcq7krqi9rrl6pphvsg81sb8pjw-gcc-wrapper-7.3.0/bin/g++
+-- Check for working CXX compiler: /nix/store/gqg2vrcq7krqi9rrl6pphvsg81sb8pjw-gcc-wrapper-7.3.0/bin/g++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Project will be installed to /home/roberto/Software/recipe-04
+-- Build type set to Release
+-- Installing LIB components to /home/roberto/Software/recipe-04/lib64
+-- Installing BIN components to /home/roberto/Software/recipe-04/bin
+-- Installing INCLUDE components to /home/roberto/Software/recipe-04/include
+-- Installing CMAKE components to /home/roberto/Software/recipe-04/share/cmake/recipe-04
+-- recipe-04 staged install: /home/roberto/Workspace/robertodr/cmake-cookbook/chapter-10/recipe-04/cxx-example/build/stage
+-- Checking for one of the modules 'uuid'
+-- Found message: /home/roberto/Software/message/lib64/libmessage.so.1 (found version 1.0.0)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/roberto/Workspace/robertodr/cmake-cookbook/chapter-10/recipe-04/cxx-example/build
+</code></pre>
+<p>项目的最终安装规则是，将安装文件复制到<code>CMAKE_INSTALL_PREFIX</code>:</p>
+<pre><code class="language-cmake">install(
+  DIRECTORY
+  	${STAGED_INSTALL_PREFIX}/
+  DESTINATION
+  	.
+  USE_SOURCE_PERMISSIONS
+  )
+</code></pre>
+<p>注意使用<code>.</code>而不是绝对路径<code>${CMAKE_INSTALL_PREFIX}</code>，这样CPack工具就可以正确理解该规则。CPack的用法将在第11章中介绍。</p>
+<p><code>recipe-04_core</code>项目构建一个简单的可执行目标，该目标链接到消息动态库。正如本章前几节所讨论，为了让可执行文件正确运行，需要正确设置<code>RPATH</code>。本章的第1节展示了，如何在CMake的帮助下实现这一点，同样的模式在<code>CMakeLists.txt</code>中被重用，用于创建<code>use_message</code>的可执行目标:</p>
+<pre><code class="language-cmake">file(RELATIVE_PATH _rel ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR} ${CMAKE_INSTALL_PREFIX})
+if(APPLE)
+  set(_rpath &quot;@loader_path/${_rel}&quot;)
+else()
+  set(_rpath &quot;\$ORIGIN/${_rel}&quot;)
+endif()
+file(TO_NATIVE_PATH &quot;${_rpath}/${CMAKE_INSTALL_LIBDIR}&quot; use_message_RPATH)
+
+set_target_properties(use_message
+  PROPERTIES
+    MACOSX_RPATH ON
+    SKIP_BUILD_RPATH OFF
+    BUILD_WITH_INSTALL_RPATH OFF
+    INSTALL_RPATH &quot;${use_message_RPATH}&quot;
+    INSTALL_RPATH_USE_LINK_PATH ON
+  )
+</code></pre>
+<p>为了检查这是否合适，可以使用本机工具打印已安装的可执行文件的<code>RPATH</code>。我们将对该工具的调用，封装到Python脚本中，并将其进一步封装到CMake脚本中。最后，使用<code>SCRIPT</code>关键字将CMake脚本作为安装规则调用:</p>
+<pre><code class="language-cmake">if(UNIX)
+  set(PRINT_SCRIPT &quot;${CMAKE_CURRENT_LIST_DIR}/cmake/print_rpath.py&quot;)
+  configure_file(cmake/install_hook.cmake.in install_hook.cmake @ONLY)
+  install(
+    SCRIPT
+      ${CMAKE_CURRENT_BINARY_DIR}/install_hook.cmake
+    )
+endif()
+</code></pre>
+<p>脚本是在安装最后进行执行:</p>
+<pre><code class="language-shell">$ cmake --build build --target install
+</code></pre>
+<p>GNU/Linux系统上，我们将看到以下输出:</p>
+<pre><code class="language-shell">Install the project...
+-- Install configuration: &quot;Release&quot;
+-- Installing: /home/roberto/Software/recipe-04/.
+-- Installing: /home/roberto/Software/recipe-04/./lib64
+-- Installing: /home/roberto/Software/recipe-04/./lib64/libmessage.so
+-- Installing: /home/roberto/Software/recipe-04/./lib64/libmessage_s.a
+-- Installing: /home/roberto/Software/recipe-04/./lib64/libmessage.so.1
+-- Installing: /home/roberto/Software/recipe-04/./include
+-- Installing: /home/roberto/Software/recipe-04/./include/message
+-- Installing: /home/roberto/Software/recipe-04/./include/message/Message.hpp
+-- Installing: /home/roberto/Software/recipe-04/./include/message/messageExport.h
+-- Installing: /home/roberto/Software/recipe-04/./share
+-- Installing: /home/roberto/Software/recipe-04/./share/cmake
+-- Installing: /home/roberto/Software/recipe-04/./share/cmake/message
+-- Installing: /home/roberto/Software/recipe-04/./share/cmake/message/messageTargets-release.cmake
+-- Installing: /home/roberto/Software/recipe-04/./share/cmake/message/messageConfigVersion.cmake
+-- Installing: /home/roberto/Software/recipe-04/./share/cmake/message/messageConfig.cmake
+-- Installing: /home/roberto/Software/recipe-04/./share/cmake/message/messageTargets.cmake
+-- Installing: /home/roberto/Software/recipe-04/./bin
+-- Installing: /home/roberto/Software/recipe-04/./bin/hello-world_wAR
+-- Installing: /home/roberto/Software/recipe-04/./bin/use_message
+-- Installing: /home/roberto/Software/recipe-04/./bin/hello-world_wDSO
+-- ELF patching tool chrpath FOUND
+-- RPATH for /home/roberto/Software/recipe-04/bin/use_message is /home/roberto/Software/recipe-04/bin/use_message: RUNPATH=$ORIGIN/../lib64:/home/roberto/Workspace/robertodr/cmake-cookbook/chapter-10/recipe-04/cxx-example/build/stage/lib64:/nix/store/di389pfcw2krnmh8nmkn55d1rnzmba37-CMake-Cookbook/lib64:/nix/store/di389pfcw2krnmh8nmkn55d1rnzmba37-CMake-Cookbook/lib:/nix/store/mjs2b8mmid86lvbzibzdlz8w5yrjgcnf-util-linux-2.31.1/lib:/nix/store/2kcrj1ksd2a14bm5sky182fv2xwfhfap-glibc-2.26-131/lib:/nix/store/4zd34747fz0ggzzasy4icgn3lmy89pra-gcc-7.3.0-lib/lib
+-- Running /home/roberto/Software/recipe-04/bin/use_message:
+This is my very nice message:
+Hello, World! From a client of yours!
+...and here is its UUID: a8014bf7-5dfa-45e2-8408-12e9a5941825
+This is my very nice message:
+Goodbye, World! From a client of yours!
+...and here is its UUID: ac971ef4-7606-460f-9144-1ad96f713647
+</code></pre>
+<p><strong>NOTE</strong>:<em>我们建议使用的工具是PatchELF (https://nixos.org/patchelf.html )、chrpath (https://linux.die.net/man/1/chrpath )和otool (http://www.manpagez.com/man/1/otool/ )。第一种方法适用于GNU/Linux和macOS，而chrpath和otool分别适用于GNU/Linux和macOS。</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                                                    <a rel="prev" href="../../content/chapter10/10.3-chinese.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+                                                    <a rel="next" href="../../content/chapter11/11.0-chinese.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                                    <a rel="prev" href="../../content/chapter10/10.3-chinese.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+                                    <a rel="next" href="../../content/chapter11/11.0-chinese.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                            </nav>
+
+        </div>
+
+        
+        
+        
+                <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+        
+                <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        
+    </body>
+</html>

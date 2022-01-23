@@ -1,0 +1,341 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>5.9 使用生成器表达式微调配置和编译 - CMakeCookBook</title>
+                
+
+        <!-- Custom HTML head -->
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+                <link rel="icon" href="../../favicon.svg">
+                        <link rel="shortcut icon" href="../../favicon.png">
+                <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+                <link rel="stylesheet" href="../../css/print.css" media="print">
+        
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+                <link rel="stylesheet" href="../../fonts/fonts.css">
+        
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+            </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../../content/preface/preface-chinese.html"><strong aria-hidden="true">2.</strong> 前言</a></li><li class="chapter-item expanded "><a href="../../content/chapter0/0.0-chinese.html"><strong aria-hidden="true">3.</strong> 第0章 配置环境</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter0/0.1-chinese.html"><strong aria-hidden="true">3.1.</strong> 0.1 获取代码</a></li><li class="chapter-item expanded "><a href="../../content/chapter0/0.2-chinese.html"><strong aria-hidden="true">3.2.</strong> 0.2 Docker镜像</a></li><li class="chapter-item expanded "><a href="../../content/chapter0/0.3-chinese.html"><strong aria-hidden="true">3.3.</strong> 0.3 安装必要的软件</a></li><li class="chapter-item expanded "><a href="../../content/chapter0/0.4-chinese.html"><strong aria-hidden="true">3.4.</strong> 0.4 测试环境</a></li><li class="chapter-item expanded "><a href="../../content/chapter0/0.5-chinese.html"><strong aria-hidden="true">3.5.</strong> 0.5 上报问题并提出改进建议</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.0-chinese.html"><strong aria-hidden="true">4.</strong> 第1章 从可执行文件到库</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter1/1.1-chinese.html"><strong aria-hidden="true">4.1.</strong> 1.1 将单个源文件编译为可执行文件</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.2-chinese.html"><strong aria-hidden="true">4.2.</strong> 1.2 切换生成器</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.3-chinese.html"><strong aria-hidden="true">4.3.</strong> 1.3 构建和链接静态库和动态库</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.4-chinese.html"><strong aria-hidden="true">4.4.</strong> 1.4 用条件句控制编译</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.5-chinese.html"><strong aria-hidden="true">4.5.</strong> 1.5 向用户显示选项</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.6-chinese.html"><strong aria-hidden="true">4.6.</strong> 1.6 指定编译器</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.7-chinese.html"><strong aria-hidden="true">4.7.</strong> 1.7 切换构建类型</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.8-chinese.html"><strong aria-hidden="true">4.8.</strong> 1.8 设置编译器选项</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.9-chinese.html"><strong aria-hidden="true">4.9.</strong> 1.9 为语言设定标准</a></li><li class="chapter-item expanded "><a href="../../content/chapter1/1.10-chinese.html"><strong aria-hidden="true">4.10.</strong> 1.10 使用控制流</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter2/2.0-chinese.html"><strong aria-hidden="true">5.</strong> 第2章 检测环境</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter2/2.1-chinese.html"><strong aria-hidden="true">5.1.</strong> 2.1 检测操作系统</a></li><li class="chapter-item expanded "><a href="../../content/chapter2/2.2-chinese.html"><strong aria-hidden="true">5.2.</strong> 2.2 处理与平台相关的源代码</a></li><li class="chapter-item expanded "><a href="../../content/chapter2/2.3-chinese.html"><strong aria-hidden="true">5.3.</strong> 2.3 处理与编译器相关的源代码</a></li><li class="chapter-item expanded "><a href="../../content/chapter2/2.4-chinese.html"><strong aria-hidden="true">5.4.</strong> 2.4 检测处理器体系结构</a></li><li class="chapter-item expanded "><a href="../../content/chapter2/2.5-chinese.html"><strong aria-hidden="true">5.5.</strong> 2.5 检测处理器指令集</a></li><li class="chapter-item expanded "><a href="../../content/chapter2/2.6-chinese.html"><strong aria-hidden="true">5.6.</strong> 2.6 为Eigen库使能向量化</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.0-chinese.html"><strong aria-hidden="true">6.</strong> 第3章 检测外部库和程序</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter3/3.1-chinese.html"><strong aria-hidden="true">6.1.</strong> 3.1 检测Python解释器</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.2-chinese.html"><strong aria-hidden="true">6.2.</strong> 3.2 检测Python库</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.3-chinese.html"><strong aria-hidden="true">6.3.</strong> 3.3 检测Python模块和包</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.4-chinese.html"><strong aria-hidden="true">6.4.</strong> 3.4 检测BLAS和LAPACK数学库</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.5-chinese.html"><strong aria-hidden="true">6.5.</strong> 3.5 检测OpenMP的并行环境</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.6-chinese.html"><strong aria-hidden="true">6.6.</strong> 3.6 检测MPI的并行环境</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.7-chinese.html"><strong aria-hidden="true">6.7.</strong> 3.7 检测Eigen库</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.8-chinese.html"><strong aria-hidden="true">6.8.</strong> 3.8 检测Boost库</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.9-chinese.html"><strong aria-hidden="true">6.9.</strong> 3.9 检测外部库:Ⅰ. 使用pkg-config</a></li><li class="chapter-item expanded "><a href="../../content/chapter3/3.10-chinese.html"><strong aria-hidden="true">6.10.</strong> 3.10 检测外部库:Ⅱ. 自定义find模块</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.0-chinese.html"><strong aria-hidden="true">7.</strong> 第4章 创建和运行测试</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter4/4.1-chinese.html"><strong aria-hidden="true">7.1.</strong> 4.1 创建一个简单的单元测试</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.2-chinese.html"><strong aria-hidden="true">7.2.</strong> 4.2 使用Catch2库进行单元测试</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.3-chinese.html"><strong aria-hidden="true">7.3.</strong> 4.3 使用Google Test库进行单元测试</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.4-chinese.html"><strong aria-hidden="true">7.4.</strong> 4.4 使用Boost Test进行单元测试</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.5-chinese.html"><strong aria-hidden="true">7.5.</strong> 4.5 使用动态分析来检测内存缺陷</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.6-chinese.html"><strong aria-hidden="true">7.6.</strong> 4.6 预期测试失败</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.7-chinese.html"><strong aria-hidden="true">7.7.</strong> 4.7 使用超时测试运行时间过长的测试</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.8-chinese.html"><strong aria-hidden="true">7.8.</strong> 4.8 并行测试</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.9-chinese.html"><strong aria-hidden="true">7.9.</strong> 4.9 运行测试子集</a></li><li class="chapter-item expanded "><a href="../../content/chapter4/4.10-chinese.html"><strong aria-hidden="true">7.10.</strong> 4.10 使用测试固件</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.0-chinese.html"><strong aria-hidden="true">8.</strong> 第5章 配置时和构建时的操作</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter5/5.1-chinese.html"><strong aria-hidden="true">8.1.</strong> 5.1 使用平台无关的文件操作</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.2-chinese.html"><strong aria-hidden="true">8.2.</strong> 5.2 配置时运行自定义命令</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.3-chinese.html"><strong aria-hidden="true">8.3.</strong> 5.3 构建时运行自定义命令:Ⅰ. 使用add_custom_command</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.4-chinese.html"><strong aria-hidden="true">8.4.</strong> 5.4 构建时运行自定义命令:Ⅱ. 使用add_custom_target</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.5-chinese.html"><strong aria-hidden="true">8.5.</strong> 5.5 构建时为特定目标运行自定义命令</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.6-chinese.html"><strong aria-hidden="true">8.6.</strong> 5.6 探究编译和链接命令</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.7-chinese.html"><strong aria-hidden="true">8.7.</strong> 5.7 探究编译器标志命令</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.8-chinese.html"><strong aria-hidden="true">8.8.</strong> 5.8 探究可执行命令</a></li><li class="chapter-item expanded "><a href="../../content/chapter5/5.9-chinese.html" class="active"><strong aria-hidden="true">8.9.</strong> 5.9 使用生成器表达式微调配置和编译</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter6/6.0-chinese.html"><strong aria-hidden="true">9.</strong> 第6章 生成源码</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter6/6.1-chinese.html"><strong aria-hidden="true">9.1.</strong> 6.1 配置时生成源码</a></li><li class="chapter-item expanded "><a href="../../content/chapter6/6.2-chinese.html"><strong aria-hidden="true">9.2.</strong> 6.2 使用Python在配置时生成源码</a></li><li class="chapter-item expanded "><a href="../../content/chapter6/6.3-chinese.html"><strong aria-hidden="true">9.3.</strong> 6.3 构建时使用Python生成源码</a></li><li class="chapter-item expanded "><a href="../../content/chapter6/6.4-chinese.html"><strong aria-hidden="true">9.4.</strong> 6.4 记录项目版本信息以便报告</a></li><li class="chapter-item expanded "><a href="../../content/chapter6/6.5-chinese.html"><strong aria-hidden="true">9.5.</strong> 6.5 从文件中记录项目版本</a></li><li class="chapter-item expanded "><a href="../../content/chapter6/6.6-chinese.html"><strong aria-hidden="true">9.6.</strong> 6.6 配置时记录Git Hash值</a></li><li class="chapter-item expanded "><a href="../../content/chapter6/6.7-chinese.html"><strong aria-hidden="true">9.7.</strong> 6.7 构建时记录Git Hash值</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.0-chinese.html"><strong aria-hidden="true">10.</strong> 第7章 构建项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter7/7.1-chinese.html"><strong aria-hidden="true">10.1.</strong> 7.1 使用函数和宏重用代码</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.2-chinese.html"><strong aria-hidden="true">10.2.</strong> 7.2 将CMake源代码分成模块</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.3-chinese.html"><strong aria-hidden="true">10.3.</strong> 7.3 编写函数来测试和设置编译器标志</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.4-chinese.html"><strong aria-hidden="true">10.4.</strong> 7.4 用指定参数定义函数或宏</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.5-chinese.html"><strong aria-hidden="true">10.5.</strong> 7.5 重新定义函数和宏</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.6-chinese.html"><strong aria-hidden="true">10.6.</strong> 7.6 使用废弃函数、宏和变量</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.7-chinese.html"><strong aria-hidden="true">10.7.</strong> 7.7 add_subdirectory的限定范围</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.8-chinese.html"><strong aria-hidden="true">10.8.</strong> 7.8 使用target_sources避免全局变量</a></li><li class="chapter-item expanded "><a href="../../content/chapter7/7.9-chinese.html"><strong aria-hidden="true">10.9.</strong> 7.9 组织Fortran项目</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter8/8.0-chinese.html"><strong aria-hidden="true">11.</strong> 第8章 超级构建模式</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter8/8.1-chinese.html"><strong aria-hidden="true">11.1.</strong> 8.1 使用超级构建模式</a></li><li class="chapter-item expanded "><a href="../../content/chapter8/8.2-chinese.html"><strong aria-hidden="true">11.2.</strong> 8.2 使用超级构建管理依赖项:Ⅰ.Boost库</a></li><li class="chapter-item expanded "><a href="../../content/chapter8/8.3-chinese.html"><strong aria-hidden="true">11.3.</strong> 8.3 使用超级构建管理依赖项:Ⅱ.FFTW库</a></li><li class="chapter-item expanded "><a href="../../content/chapter8/8.4-chinese.html"><strong aria-hidden="true">11.4.</strong> 8.4 使用超级构建管理依赖项:Ⅲ.Google Test框架</a></li><li class="chapter-item expanded "><a href="../../content/chapter8/8.5-chinese.html"><strong aria-hidden="true">11.5.</strong> 8.5 使用超级构建支持项目</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter9/9.0-chinese.html"><strong aria-hidden="true">12.</strong> 第9章 语言混合项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter9/9.1-chinese.html"><strong aria-hidden="true">12.1.</strong> 9.1 使用C/C++库构建Fortran项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter9/9.2-chinese.html"><strong aria-hidden="true">12.2.</strong> 9.2 使用Fortran库构建C/C++项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter9/9.3-chinese.html"><strong aria-hidden="true">12.3.</strong> 9.3 使用Cython构建C++和Python项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter9/9.4-chinese.html"><strong aria-hidden="true">12.4.</strong> 9.4 使用Boost.Python构建C++和Python项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter9/9.5-chinese.html"><strong aria-hidden="true">12.5.</strong> 9.5 使用pybind11构建C++和Python项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter9/9.6-chinese.html"><strong aria-hidden="true">12.6.</strong> 9.6 使用Python CFFI混合C，C++，Fortran和Python</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter10/10.0-chinese.html"><strong aria-hidden="true">13.</strong> 第10章 编写安装程序</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter10/10.1-chinese.html"><strong aria-hidden="true">13.1.</strong> 10.1 安装项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter10/10.2-chinese.html"><strong aria-hidden="true">13.2.</strong> 10.2 生成输出头文件</a></li><li class="chapter-item expanded "><a href="../../content/chapter10/10.3-chinese.html"><strong aria-hidden="true">13.3.</strong> 10.3 输出目标</a></li><li class="chapter-item expanded "><a href="../../content/chapter10/10.4-chinese.html"><strong aria-hidden="true">13.4.</strong> 10.4 安装超级构建</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter11/11.0-chinese.html"><strong aria-hidden="true">14.</strong> 第11章 打包项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter11/11.1-chinese.html"><strong aria-hidden="true">14.1.</strong> 11.1 生成源代码和二进制包</a></li><li class="chapter-item expanded "><a href="../../content/chapter11/11.2-chinese.html"><strong aria-hidden="true">14.2.</strong> 11.2 通过PyPI发布使用CMake/pybind11构建的C++/Python项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter11/11.3-chinese.html"><strong aria-hidden="true">14.3.</strong> 11.3 通过PyPI发布使用CMake/CFFI构建C/Fortran/Python项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter11/11.4-chinese.html"><strong aria-hidden="true">14.4.</strong> 11.4 以Conda包的形式发布一个简单的项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter11/11.5-chinese.html"><strong aria-hidden="true">14.5.</strong> 11.5 将Conda包作为依赖项发布给项目</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter12/12.0-chinese.html"><strong aria-hidden="true">15.</strong> 第12章 构建文档</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter12/12.1-chinese.html"><strong aria-hidden="true">15.1.</strong> 12.1 使用Doxygen构建文档</a></li><li class="chapter-item expanded "><a href="../../content/chapter12/12.2-chinese.html"><strong aria-hidden="true">15.2.</strong> 12.2 使用Sphinx构建文档</a></li><li class="chapter-item expanded "><a href="../../content/chapter12/12.3-chinese.html"><strong aria-hidden="true">15.3.</strong> 12.3 结合Doxygen和Sphinx</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter13/13.0-chinese.html"><strong aria-hidden="true">16.</strong> 第13章 选择生成器和交叉编译</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter13/13.1-chinese.html"><strong aria-hidden="true">16.1.</strong> 13.1 使用CMake构建Visual Studio 2017项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter13/13.2-chinese.html"><strong aria-hidden="true">16.2.</strong> 13.2 交叉编译hello world示例</a></li><li class="chapter-item expanded "><a href="../../content/chapter13/13.3-chinese.html"><strong aria-hidden="true">16.3.</strong> 13.3 使用OpenMP并行化交叉编译Windows二进制文件</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter14/14.0-chinese.html"><strong aria-hidden="true">17.</strong> 第14章 测试面板</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter14/14.1-chinese.html"><strong aria-hidden="true">17.1.</strong> 14.1 将测试部署到CDash</a></li><li class="chapter-item expanded "><a href="../../content/chapter14/14.2-chinese.html"><strong aria-hidden="true">17.2.</strong> 14.2 CDash显示测试覆盖率</a></li><li class="chapter-item expanded "><a href="../../content/chapter14/14.3-chinese.html"><strong aria-hidden="true">17.3.</strong> 14.3 使用AddressSanifier向CDash报告内存缺陷</a></li><li class="chapter-item expanded "><a href="../../content/chapter14/14.4-chinese.html"><strong aria-hidden="true">17.4.</strong> 14.4 使用ThreadSaniiser向CDash报告数据争用</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.0-chinese.html"><strong aria-hidden="true">18.</strong> 第15章 使用CMake构建已有项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter15/15.1-chinese.html"><strong aria-hidden="true">18.1.</strong> 15.1 如何开始迁移项目</a></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.2-chinese.html"><strong aria-hidden="true">18.2.</strong> 15.2 生成文件并编写平台检查</a></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.3-chinese.html"><strong aria-hidden="true">18.3.</strong> 15.3 检测所需的链接和依赖关系</a></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.4-chinese.html"><strong aria-hidden="true">18.4.</strong> 15.4 复制编译标志</a></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.5-chinese.html"><strong aria-hidden="true">18.5.</strong> 15.5 移植测试</a></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.6-chinese.html"><strong aria-hidden="true">18.6.</strong> 15.6 移植安装目标</a></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.7-chinese.html"><strong aria-hidden="true">18.7.</strong> 15.7 进一步迁移的措施</a></li><li class="chapter-item expanded "><a href="../../content/chapter15/15.8-chinese.html"><strong aria-hidden="true">18.8.</strong> 15.8 项目转换为CMake的常见问题</a></li></ol></li><li class="chapter-item expanded "><a href="../../content/chapter16/16.0-chinese.html"><strong aria-hidden="true">19.</strong> 第16章 可能感兴趣的书</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../content/chapter16/16.1-chinese.html"><strong aria-hidden="true">19.1.</strong> 16.1 留下评论——让其他读者知道你的想法</a></li></ol></li></ol>            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                                                <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                                            </div>
+
+                    <h1 class="menu-title">CMakeCookBook</h1>
+
+                    <div class="right-buttons">
+                                                <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                                                                        
+                    </div>
+                </div>
+
+                                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="59-使用生成器表达式微调配置和编译"><a class="header" href="#59-使用生成器表达式微调配置和编译">5.9 使用生成器表达式微调配置和编译</a></h1>
+<p><strong>NOTE</strong>:<em>此示例代码可以在 https://github.com/dev-cafe/cmake-cookbook/tree/v1.0/chapter-5/recipe-09 中找到，其中包含一个C++例子。该示例在CMake 3.9版(或更高版本)中是有效的，并且已经在GNU/Linux、macOS和Windows上进行过测试。</em></p>
+<p>CMake提供了一种特定于领域的语言，来描述如何配置和构建项目。自然会引入描述特定条件的变量，并在<code>CMakeLists.txt</code>中包含基于此的条件语句。</p>
+<p>本示例中，我们将重新讨论生成器表达式。第4章中，以简洁地引用显式的测试可执行路径，使用了这些表达式。生成器表达式为逻辑和信息表达式，提供了一个强大而紧凑的模式，这些表达式在生成构建系统时进行评估，并生成特定于每个构建配置的信息。换句话说，生成器表达式用于引用仅在生成时已知，但在配置时未知或难于知晓的信息；对于文件名、文件位置和库文件后缀尤其如此。</p>
+<p>本例中，我们将使用生成器表达式，有条件地设置预处理器定义，并有条件地链接到消息传递接口库(Message Passing Interface, MPI)，并允许我们串行或使用MPI构建相同的源代码。</p>
+<p><strong>NOTE</strong>:<em>本例中，我们将使用一个导入的目标来链接到MPI，该目标仅从CMake 3.9开始可用。但是，生成器表达式可以移植到CMake 3.0或更高版本。</em></p>
+<h2 id="准备工作"><a class="header" href="#准备工作">准备工作</a></h2>
+<p>我们将编译以下示例源代码(<code>example.cpp</code>):</p>
+<pre><code class="language-c++">#include &lt;iostream&gt;
+
+#ifdef HAVE_MPI
+#include &lt;mpi.h&gt;
+#endif
+int main()
+{
+#ifdef HAVE_MPI
+  // initialize MPI
+  MPI_Init(NULL, NULL);
+
+  // query and print the rank
+  int rank;
+  MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);
+  std::cout &lt;&lt; &quot;hello from rank &quot; &lt;&lt; rank &lt;&lt; std::endl;
+
+  // initialize MPI
+  MPI_Finalize();
+#else
+  std::cout &lt;&lt; &quot;hello from a sequential binary&quot; &lt;&lt; std::endl;
+#endif /* HAVE_MPI */
+}
+</code></pre>
+<p>代码包含预处理语句(<code>#ifdef HAVE_MPI ...  #else ...  #endif</code>)，这样我们就可以用相同的源代码编译一个顺序的或并行的可执行文件了。</p>
+<h2 id="具体实施"><a class="header" href="#具体实施">具体实施</a></h2>
+<p>编写<code>CMakeLists.txt</code>文件时，我们将重用第3章第6节的一些构建块:</p>
+<ol>
+<li>
+<p>声明一个C++11项目：</p>
+<pre><code class="language-cmake">cmake_minimum_required(VERSION 3.9 FATAL_ERROR)
+project(recipe-09 LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+</code></pre>
+</li>
+<li>
+<p>然后，我们引入一个选项<code>USE_MPI</code>来选择MPI并行化，并将其设置为默认值<code>ON</code>。如果为<code>ON</code>，我们使用<code>find_package</code>来定位MPI环境:</p>
+<pre><code class="language-cmake">option(USE_MPI &quot;Use MPI parallelization&quot; ON)
+if(USE_MPI)
+	find_package(MPI REQUIRED)
+endif()
+</code></pre>
+</li>
+<li>
+<p>然后定义可执行目标，并有条件地设置相应的库依赖项(<code>MPI::MPI_CXX</code>)和预处理器定义(<code>HAVE_MPI</code>)，稍后将对此进行解释:</p>
+<pre><code class="language-cmake">add_executable(example example.cpp)
+target_link_libraries(example
+  PUBLIC
+  	$&lt;$&lt;BOOL:${MPI_FOUND}&gt;:MPI::MPI_CXX&gt;
+  )
+target_compile_definitions(example
+  PRIVATE
+  	$&lt;$&lt;BOOL:${MPI_FOUND}&gt;:HAVE_MPI&gt;
+  )	
+</code></pre>
+</li>
+<li>
+<p>如果找到MPI，还将打印由<code>FindMPI.cmake</code>导出的<code>INTERFACE_LINK_LIBRARIES</code>，为了方便演示，使用了<code>cmake_print_properties()</code>函数:</p>
+<pre><code class="language-cmake">if(MPI_FOUND)
+  include(CMakePrintHelpers)
+  cmake_print_properties(
+    TARGETS MPI::MPI_CXX
+    PROPERTIES INTERFACE_LINK_LIBRARIES
+    )
+endif()
+</code></pre>
+</li>
+<li>
+<p>首先使用默认MPI配置。观察<code>cmake_print_properties()</code>的输出:</p>
+<pre><code class="language-shell">$ mkdir -p build_mpi
+$ cd build_mpi
+$ cmake ..
+
+-- ...
+--
+Properties for TARGET MPI::MPI_CXX:
+MPI::MPI_CXX.INTERFACE_LINK_LIBRARIES = &quot;-Wl,-rpath -Wl,/usr/lib/openmpi -Wl,--enable-new-dtags -pthread;/usr/lib/openmpi/libmpi_cxx.so;/usr/lib/openmpi/libmpi.so&quot;
+</code></pre>
+</li>
+<li>
+<p>编译并运行并行例子:</p>
+<pre><code class="language-cmake">$ cmake --build .
+$ mpirun -np 2 ./example
+
+hello from rank 0
+hello from rank 1
+</code></pre>
+</li>
+<li>
+<p>现在，创建一个新的构建目录，这次构建串行版本:</p>
+<pre><code class="language-shell">$ mkdir -p build_seq
+$ cd build_seq
+$ cmake -D USE_MPI=OFF ..
+$ cmake --build .
+$ ./example
+
+hello from a sequential binary
+</code></pre>
+</li>
+</ol>
+<h2 id="工作原理"><a class="header" href="#工作原理">工作原理</a></h2>
+<p>CMake分两个阶段生成项目的构建系统：配置阶段(解析<code>CMakeLists.txt</code>)和生成阶段(实际生成构建环境)。生成器表达式在第二阶段进行计算，可以使用仅在生成时才能知道的信息来调整构建系统。生成器表达式在交叉编译时特别有用，一些可用的信息只有解析<code>CMakeLists.txt</code>之后，或在多配置项目后获取，构建系统生成的所有项目可以有不同的配置，比如Debug和Release。</p>
+<p>本例中，将使用生成器表达式有条件地设置链接依赖项并编译定义。为此，可以关注这两个表达式:</p>
+<pre><code class="language-cmake">target_link_libraries(example
+  PUBLIC
+  	$&lt;$&lt;BOOL:${MPI_FOUND}&gt;:MPI::MPI_CXX&gt;
+  )
+target_compile_definitions(example
+  PRIVATE
+  	$&lt;$&lt;BOOL:${MPI_FOUND}&gt;:HAVE_MPI&gt;
+  )
+</code></pre>
+<p>如果<code>MPI_FOUND</code>为真，那么<code> $&lt;BOOL:${MPI_FOUND}&gt;</code>的值将为1。本例中，<code>$&lt;$&lt;BOOL:${MPI_FOUND}&gt;:MPI::MPI_CXX&gt;</code>将计算<code>MPI::MPI_CXX</code>，第二个生成器表达式将计算结果存在<code>HAVE_MPI</code>。如果将<code>USE_MPI</code>设置为<code>OFF</code>，则<code>MPI_FOUND</code>为假，两个生成器表达式的值都为空字符串，因此不会引入链接依赖关系，也不会设置预处理定义。</p>
+<p>我们可以通过<code>if</code>来达到同样的效果:</p>
+<pre><code class="language-cmake">if(MPI_FOUND)
+  target_link_libraries(example
+    PUBLIC
+    	MPI::MPI_CXX
+    )
+    
+  target_compile_definitions(example
+    PRIVATE
+    	HAVE_MPI
+    )
+endif()	
+</code></pre>
+<p>这个解决方案不太优雅，但可读性更好。我们可以使用生成器表达式来重新表达<code>if</code>语句，而这个选择取决于个人喜好。但当我们需要访问或操作文件路径时，生成器表达式尤其出色，因为使用变量和<code>if</code>构造这些路径可能比较困难。本例中，我们更注重生成器表达式的可读性。第4章中，我们使用生成器表达式来解析特定目标的文件路径。第11章中，我们会再次来讨论生成器。</p>
+<h2 id="更多信息"><a class="header" href="#更多信息">更多信息</a></h2>
+<p>CMake提供了三种类型的生成器表达式:</p>
+<ul>
+<li><strong>逻辑表达式</strong>，基本模式为<code>$&lt;condition:outcome&gt;</code>。基本条件为0表示false, 1表示true，但是只要使用了正确的关键字，任何布尔值都可以作为条件变量。</li>
+<li><strong>信息表达式</strong>，基本模式为<code>$&lt;information&gt;</code>或<code>$&lt;information:input&gt;</code>。这些表达式对一些构建系统信息求值，例如：包含目录、目标属性等等。这些表达式的输入参数可能是目标的名称，比如表达式<code> $&lt;TARGET_PROPERTY:tgt,prop&gt;</code>，将获得的信息是tgt目标上的prop属性。</li>
+<li><strong>输出表达式</strong>，基本模式为<code>$&lt;operation&gt;</code>或<code>$&lt;operation:input&gt;</code>。这些表达式可能基于一些输入参数，生成一个输出。它们的输出可以直接在CMake命令中使用，也可以与其他生成器表达式组合使用。例如,
+<code>- I$&lt;JOIN:$&lt;TARGET_PROPERTY:INCLUDE_DIRECTORIES&gt;, -I&gt;</code>将生成一个字符串，其中包含正在处理的目标的包含目录，每个目录的前缀由<code>-I</code>表示。</li>
+</ul>
+<p>有关生成器表达式的完整列表，请参考https://cmake.org/cmake/help/latest/manual/cmake-generator-expressions.7.html</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                                                    <a rel="prev" href="../../content/chapter5/5.8-chinese.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+                                                    <a rel="next" href="../../content/chapter6/6.0-chinese.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                                    <a rel="prev" href="../../content/chapter5/5.8-chinese.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+                                    <a rel="next" href="../../content/chapter6/6.0-chinese.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                            </nav>
+
+        </div>
+
+        
+        
+        
+                <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+        
+                <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        
+    </body>
+</html>
